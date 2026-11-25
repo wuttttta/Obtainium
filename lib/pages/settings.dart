@@ -526,6 +526,9 @@ class _SettingsPageState extends State<SettingsPage> {
       padding: EdgeInsets.zero,
       child: TvFocusRing(
         borderRadius: AppRadii.small,
+        shape: RoundedSuperellipseBorder(
+          borderRadius: BorderRadius.circular(AppRadii.small),
+        ),
         child: ListTile(
           autofocus: autofocus,
           contentPadding: AppPaddings.rowHorizontal,
@@ -725,6 +728,12 @@ class _SettingsPageState extends State<SettingsPage> {
         value: settingsProvider.checkOnStart,
         onChanged: (value) => settingsProvider.checkOnStart = value,
       ),
+      if (!settingsProvider.isTV)
+        ToggleTile(
+          label: tr('useRefreshButton'),
+          value: settingsProvider.useRefreshButton,
+          onChanged: (value) => settingsProvider.useRefreshButton = value,
+        ),
       ToggleTile(
         label: tr('checkUpdateOnDetailPage'),
         value: settingsProvider.checkUpdateOnDetailPage,
@@ -742,6 +751,12 @@ class _SettingsPageState extends State<SettingsPage> {
         value: settingsProvider.onlyCheckInstalledOrTrackOnlyApps,
         onChanged: (value) =>
             settingsProvider.onlyCheckInstalledOrTrackOnlyApps = value,
+      ),
+      ToggleTile(
+        label: tr('checkSystemDisabledApps'),
+        value: settingsProvider.checkSystemDisabledApps,
+        onChanged: (value) => settingsProvider.checkSystemDisabledApps = value,
+        helpWidgets: [Text(tr('checkSystemDisabledAppsHelp'))],
       ),
       SectionHeader(
         tr('filteringAndVersions'),
@@ -1051,6 +1066,7 @@ class _SettingsPageState extends State<SettingsPage> {
             subtitle: Text(_themeColourLabel(settingsProvider.themeColor)),
             trailing: TvFocusRing(
               borderRadius: 20,
+              shape: const CircleBorder(),
               child: ColorIndicator(
                 width: 40,
                 height: 40,
