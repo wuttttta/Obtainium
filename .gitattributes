@@ -1,3 +1,4 @@
 assets/translations/*.json merge=fork-keys
 assets/translations/package*.json merge
 pubspec.lock merge=fork-keys
+README.md merge=fork-keys

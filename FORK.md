@@ -30,6 +30,11 @@ working as usual. The feature is off by default (Settings → Updates →
 
 Pushes to `push` run the same checks and an unsigned build, without releasing.
 
+The APK in every release is called `obtainium-push.apk`, so
+https://github.com/wuttttta/Obtainium/releases/latest/download/obtainium-push.apk always
+downloads the newest one (the button at the top of the README). The README merge keeps that
+button on top of upstream's text.
+
 Releases are named `<upstream version>-push.<n>` (for example `1.7.4-push.1`). The APK
 uses the same version name, and version code `<upstream code> × 100 + n`. The build uses
 the app ID `dev.imranr.obtainium.push` and the label "Obtainium Push", so it installs next

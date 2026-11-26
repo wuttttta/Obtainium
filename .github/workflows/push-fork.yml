@@ -84,7 +84,7 @@ jobs:
             reason="forced"
           elif [ -z "$last" ]; then
             reason="no previous release"
-          elif ! git diff --quiet "$last" HEAD -- . ':(exclude).github' ':(exclude).gitattributes' ':(exclude)FORK.md' ':(exclude)tool/fork_merge_driver*'; then
+          elif ! git diff --quiet "$last" HEAD -- . ':(exclude).github' ':(exclude).gitattributes' ':(exclude)FORK.md' ':(exclude)README.md' ':(exclude)tool/fork_merge_driver*'; then
             reason="changes since $last"
           else
             echo "Nothing changed since $last; not releasing."
@@ -222,7 +222,7 @@ jobs:
           NAME: ${{ steps.version.outputs.name }}
           BASE: ${{ steps.version.outputs.base }}
         run: |
-          apk="obtainium-push-$NAME.apk"
+          apk="obtainium-push.apk"
           mv build/app/outputs/flutter-apk/app-normal-release.apk "$apk"
           sha256sum "$apk" > "$apk.sha256"
           {

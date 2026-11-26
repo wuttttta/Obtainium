@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { mergeJson, mergeLock } from './fork_merge_driver.mjs'
+import { mergeJson, mergeLock, mergeReadme } from './fork_merge_driver.mjs'
 
 const json = value => `${JSON.stringify(value, null, 4)}\n`
 
@@ -52,4 +52,15 @@ test('merges pubspec.lock package by package in sorted order', () => {
         mergeLock(base, ours, theirs),
         lock({ aaa: '1', typed_data: '2', unifiedpush: '9', upower: '2' }, '3.1'),
     )
+})
+
+test('keeps the fork banner on top of the upstream README', () => {
+    const base = '# Obtainium\nOld intro\n'
+    const ours = `Fork banner\n\n${base}`
+    const theirs = '# Obtainium\nNew intro\n'
+    assert.equal(mergeReadme(base, ours, theirs), 'Fork banner\n\n# Obtainium\nNew intro\n')
+})
+
+test('refuses a README whose fork edits are not only a banner on top', () => {
+    assert.throws(() => mergeReadme('a\nb\n', 'a\nchanged\n', 'a\nb\nc\n'))
 })

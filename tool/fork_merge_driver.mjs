@@ -71,12 +71,23 @@ export const mergeLock = (base, ours, theirs) => {
     return [theirsLock.header, ...packages, footer].join('\n')
 }
 
+export const mergeReadme = (base, ours, theirs) => {
+    if (!ours.endsWith(base)) {
+        throw new Error('README.md: the fork may only add text before the upstream text')
+    }
+    return ours.slice(0, ours.length - base.length) + theirs
+}
+
 const main = () => {
     const [basePath, oursPath, theirsPath, targetPath] = process.argv.slice(2)
     const [base, ours, theirs] = [basePath, oursPath, theirsPath].map(path =>
         fs.readFileSync(path, 'utf-8'),
     )
-    const merge = targetPath.endsWith('pubspec.lock') ? mergeLock : mergeJson
+    const merge = targetPath.endsWith('pubspec.lock')
+        ? mergeLock
+        : targetPath.endsWith('README.md')
+            ? mergeReadme
+            : mergeJson
     fs.writeFileSync(oursPath, merge(base, ours, theirs))
 }
 

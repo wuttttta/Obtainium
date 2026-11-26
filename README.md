@@ -1,3 +1,11 @@
+**Obtainium Push**: a personal build of Obtainium that can update an app the moment it is released.
+
+[![Download the latest APK](https://img.shields.io/badge/Download-latest%20APK-7c4dff?style=for-the-badge&logo=android&logoColor=white)](https://github.com/wuttttta/Obtainium/releases/latest/download/obtainium-push.apk)
+
+Install it over an older version to update; your apps and settings stay. Details: [FORK.md](FORK.md).
+
+---
+
 <!-- <div align="center"><a href="https://github.com/Safouene1/support-palestine-banner/blob/master/Markdown-pages/Support.md"><img src="https://raw.githubusercontent.com/Safouene1/support-palestine-banner/master/banner-support.svg" alt="Support Palestine" style="width: 100%;"></a></div> -->
 <!-- Banner temporarily removed for reasons, will re-enable or replace shortly -->
 
